@@ -1,0 +1,49 @@
+import speech_recognition as sr
+from gtts import gTTS
+import os
+import time
+
+#input of users name
+name = input()
+time.sleep(5)
+
+myobj = gTTS(text="hey"+name+" what can i do for you,if there's nothing to do then i will go for sleep, and yes dont dare to wake me up, lots of love", lang='en', slow=False)
+myobj.save("text1.mp3")
+os.system("start text1.mp3")
+
+r = sr.Recognizer()
+
+with sr.Microphone() as source:
+    print("Speak...")
+    
+    audio = r.listen(source)
+    
+    
+print(r.recognize_google(audio))
+audio = str(r.recognize_google(audio))
+try:
+    from googlesearch import search
+except ImportError:
+    print("no module named google found")
+
+
+def bruno(audio):
+    if audio == "how are you":
+        myobj = gTTS(text="hi, i am fine , what about you", lang='en', slow=False)
+        myobj.save("text1.mp3")
+        os.system("start text1.mp3")
+        
+    elif audio == "what time is it":
+        t = str(time.ctime())
+        myobj = gTTS(text=t, lang='en', slow=False)
+        myobj.save("text1.mp3")
+        os.system("start text1.mp3")
+
+    elif audio =="tell me my location":
+        location= "indore"
+        mytext = "Hey"+name+"your current location is Indore!"
+        myobj = gTTS(text=mytext, lang='en', slow=False)
+        myobj.save("text1.mp3")
+        os.system("start text1.mp3")
+
+bruno(audio)
